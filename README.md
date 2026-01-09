@@ -1,13 +1,13 @@
 # API-project-Crud
 # Postman CRUD API Testing Project
 
-## 📌 Project Overview
+##  Project Overview
 This project demonstrates API testing using **Postman** for performing **CRUD operations** (Create, Read, Update, Delete) on REST APIs.  
 It covers request validation, authentication handling, data-driven testing, and automated execution using the Postman Collection Runner.
 
 ---
 
-## 🛠️ Tools & Technologies Used
+## Tools & Technologies Used
 - Postman
 - REST API
 - JSON
@@ -16,7 +16,7 @@ It covers request validation, authentication handling, data-driven testing, and 
 
 ---
 
-## 🔐 Authentication
+## Authentication
 - Token-based authentication is implemented.
 - Token is generated from the **Login API** and stored as an environment variable.
 - The token is reused across all secured APIs using the `Authorization` header.
@@ -24,9 +24,9 @@ It covers request validation, authentication handling, data-driven testing, and 
 
 ---
 
-## 🔄 APIs Covered
+## APIs Covered
 
-### ✅ CREATE
+###  CREATE
 - Method: `POST`
 - Description: Create a new resource
 - Validations:
@@ -34,21 +34,21 @@ It covers request validation, authentication handling, data-driven testing, and 
   - Response body fields
   - Response time
 
-### ✅ READ
+###  READ
 - Method: `GET`
 - Description: Retrieve resource details
 - Validations:
   - Status code
   - Correct data retrieval
 
-### ✅ UPDATE
+###  UPDATE
 - Method: `PUT / PATCH`
 - Description: Update existing resource
 - Validations:
   - Updated values
   - Status code
 
-### ✅ DELETE
+###  DELETE
 - Method: `DELETE`
 - Description: Remove resource
 - Validations:
@@ -57,14 +57,14 @@ It covers request validation, authentication handling, data-driven testing, and 
 
 ---
 
-## 📊 Data-Driven Testing
+##  Data-Driven Testing
 - CSV file is used to run the same API with multiple data sets.
 - Collection Runner is used for execution.
 - Variables are dynamically replaced using `{{variableName}}`.
 
 ---
 
-## ▶️ How to Run the Project
+##  How to Run the Project
 
 1. Clone the repository:
    ```bash
