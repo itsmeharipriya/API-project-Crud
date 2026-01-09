@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "71f7d311-2441-4a5a-acd1-359a22d43ea9",
+		"name": "CruD API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40487443"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const schema = { \r",
+							"\"type\": \"array\", \r",
+							"\"properties\": { \r",
+							"\"user\": { \"type\": \"array\" } \r",
+							"}, \r",
+							"\"required\": [\"user\"] \r",
+							"}; \r",
+							"pm.test(\"Response body adheres to JSON schema\", function () { \r",
+							"pm.response.to.have.jsonSchema(schema); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response=pm.response.json();\r",
+							"pm.environment.set(\"token\",response.token);\r",
+							"pm.test(\"token is received\",()=>{\r",
+							"    pm.expect(response.token).to.not.be.undefined;\r",
+							"    console.log(\"TOKEN:\", response.token);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres_aca8b58e11834a3093c710f1713ead11",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"eve.holt@reqres.in\",\r\n  \"password\": \"cityslicka\",\r\n  \"age\":\"{{age}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/login",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseJSON = pm.response.json();\r",
+							"\r",
+							"// Extract the 'id' from the response and store it in an environment variable\r",
+							"pm.test(\"Store user ID in environment variable\", function () {\r",
+							"    pm.environment.set(\"userid\", responseJSON.id);\r",
+							"});\r",
+							"var responseJSON = pm.response.json();\r",
+							"\r",
+							"// Test to check if the response body contains the 'id' property\r",
+							"pm.test(\"Response body contains 'id' property\", function () {\r",
+							"    pm.expect(responseJSON).to.have.property('id');\r",
+							"});\r",
+							"\r",
+							"// Extract the 'id' from the response and store it in an environment variable\r",
+							"pm.test(\"Store user ID in environment variable\", function () {\r",
+							"    pm.environment.set(\"userid\", responseJSON.id);\r",
+							"});\r",
+							"pm.test(\"Store user ID in environment variable\", function () {\r",
+							"    var responseJSON = pm.response.json();\r",
+							"    pm.environment.set(\"userid\", responseJSON.id);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres_aca8b58e11834a3093c710f1713ead11",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/users",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres_aca8b58e11834a3093c710f1713ead11",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"leader\",\r\n    \"age\":\"four\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/api/users/{{userid}}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"{{userid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
